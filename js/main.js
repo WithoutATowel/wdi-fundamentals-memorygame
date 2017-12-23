@@ -42,7 +42,19 @@ function flipCard() {
     checkForMatch();
 }
 
+function shuffle() {
+	var newDeck = [];
+	for (var i = 0; i < 4; i++) {
+	    var ranIndex = Math.round(Math.random() * (cards.length - 1));
+	    newDeck.push(cards[ranIndex]);
+	    cards.splice(ranIndex, 1);
+	}
+	console.log(newDeck);
+	cards = newDeck;
+}
+
 function createBoard() {
+	shuffle();
 	for (var i = 0; i < cards.length; i++) {
 		var cardElement = document.createElement("img");
 		cardElement.setAttribute("src", "images/back.png");
