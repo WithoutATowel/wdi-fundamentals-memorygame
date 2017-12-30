@@ -22,13 +22,27 @@ var cards = [
 ];
 var cardsInPlay = [];
 
+if (localStorage.highScore == undefined || localStorage.highScore == null) {
+    localStorage.highScore = 0;
+} else {
+    document.getElementById("highScore").innerHTML = localStorage.highScore;
+}
+
 function checkForMatch() {
     if (cardsInPlay.length === 2) {
     	if (cardsInPlay[0] === cardsInPlay[1]) {
     		document.getElementById("result").innerHTML = "Congratulations, you found a match! &nbsp;<button onclick='resetBoard()'>Play again</button>";
+            var scoreTag = document.getElementById("score")
+            var score = Number(scoreTag.innerHTML) + 1;
+            scoreTag.innerHTML = score;
+            if (score > localStorage.highScore) {
+                localStorage.highScore = score;
+                document.getElementById("highScore").innerHTML = localStorage.highScore;
+            }
     	} else {
     		document.getElementById("result").innerHTML = "Better luck next time! &nbsp;<button onclick='resetBoard()'>Try again</button>";
-    	}
+    	    document.getElementById("score").innerHTML = 0;
+        }
     }
 }
 

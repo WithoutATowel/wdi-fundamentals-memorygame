@@ -51,6 +51,20 @@ a:hover {
 	border-bottom: 2px solid white;
 }
 
+img {
+	margin: 40px 8px 20px;
+}
+
+table {
+	margin: 0 auto 10px;
+
+}
+
+td {
+	width: 100px;
+	font-family: "Raleway", sans-serif;
+}
+
 p, #result {
 	font-family: "Droid Serif", serif;
 	line-height: 26px;
@@ -75,10 +89,6 @@ button {
 
 button:active {
 	color: black;
-}
-
-img {
-	margin: 40px 8px;
 }
 
 footer {
