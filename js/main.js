@@ -30,7 +30,7 @@ if (localStorage.highScore == undefined || localStorage.highScore == null) {
 
 function checkForMatch() {
     if (cardsInPlay.length === 2) {
-    	if (cardsInPlay[0] === cardsInPlay[1]) {
+    	if (cardsInPlay[0].rank === cardsInPlay[1].rank) {
     		document.getElementById("result").innerHTML = "Congratulations, you found a match! &nbsp;<button onclick='resetBoard()'>Play again</button>";
             var scoreTag = document.getElementById("score")
             var score = Number(scoreTag.innerHTML) + 1;
@@ -48,12 +48,16 @@ function checkForMatch() {
 
 function flipCard() {
     var cardId = this.getAttribute("data-id");
-    console.log("User flipped " + cards[cardId].rank);
-    console.log(cards[cardId].cardImage);
-    console.log(cards[cardId].suit);
-    cardsInPlay.push(cards[cardId].rank);
-    this.setAttribute("src", cards[cardId].cardImage);
-    checkForMatch();
+    if (cardsInPlay.length == 1 && cardsInPlay[0].id == cardId) {
+        return;
+    } else {
+        console.log("User flipped " + cards[cardId].rank);
+        console.log(cards[cardId].cardImage);
+        console.log(cards[cardId].suit);
+        cardsInPlay.push({id : cardId, rank : cards[cardId].rank});
+        this.setAttribute("src", cards[cardId].cardImage);
+        checkForMatch();
+    }
 }
 
 function shuffle() {
