@@ -1,28 +1,28 @@
 var cards = [
     {
-    	rank : "queen",
-    	suit : "hearts",
-    	cardImage : "images/queen-of-hearts.png"
+        rank : "queen",
+        suit : "hearts",
+        cardImage : "images/queen-of-hearts.png"
     },
     {
-    	rank : "queen",
-    	suit : "diamonds",
-    	cardImage : "images/queen-of-diamonds.png"
+        rank : "queen",
+        suit : "diamonds",
+        cardImage : "images/queen-of-diamonds.png"
     },
     {
-    	rank : "king",
-    	suit : "hearts",
-    	cardImage : "images/king-of-hearts.png"
+        rank : "king",
+        suit : "hearts",
+        cardImage : "images/king-of-hearts.png"
     },
     {
-    	rank : "king",
-    	suit : "diamonds",
-    	cardImage : "images/king-of-diamonds.png"
+        rank : "king",
+        suit : "diamonds",
+        cardImage : "images/king-of-diamonds.png"
     }
 ];
 var cardsInPlay = [];
 
-if (localStorage.highScore == undefined || localStorage.highScore == null) {
+if (localStorage.highScore === undefined || localStorage.highScore === null) {
     localStorage.highScore = 0;
 } else {
     document.getElementById("highScore").innerHTML = localStorage.highScore;
@@ -30,18 +30,18 @@ if (localStorage.highScore == undefined || localStorage.highScore == null) {
 
 function checkForMatch() {
     if (cardsInPlay.length === 2) {
-    	if (cardsInPlay[0].rank === cardsInPlay[1].rank) {
-    		document.getElementById("result").innerHTML = "Congratulations, you found a match! &nbsp;<button onclick='resetBoard()'>Play again</button>";
-            var scoreTag = document.getElementById("score")
+        if (cardsInPlay[0].rank === cardsInPlay[1].rank) {
+            document.getElementById("result").innerHTML = "Congratulations, you found a match! &nbsp;<button onclick='resetBoard()'>Play again</button>";
+            var scoreTag = document.getElementById("score");
             var score = Number(scoreTag.innerHTML) + 1;
             scoreTag.innerHTML = score;
             if (score > localStorage.highScore) {
                 localStorage.highScore = score;
                 document.getElementById("highScore").innerHTML = localStorage.highScore;
             }
-    	} else {
-    		document.getElementById("result").innerHTML = "Better luck next time! &nbsp;<button onclick='resetBoard()'>Try again</button>";
-    	    document.getElementById("score").innerHTML = 0;
+        } else {
+            document.getElementById("result").innerHTML = "Better luck next time! &nbsp;<button onclick='resetBoard()'>Try again</button>";
+            document.getElementById("score").innerHTML = 0;
         }
     }
 }
@@ -61,25 +61,25 @@ function flipCard() {
 }
 
 function shuffle() {
-	var newDeck = [];
-	for (var i = 0; i < 4; i++) {
-	    var ranIndex = Math.round(Math.random() * (cards.length - 1));
-	    newDeck.push(cards[ranIndex]);
-	    cards.splice(ranIndex, 1);
-	}
-	console.log(newDeck);
-	cards = newDeck;
+    var newDeck = [];
+    for (var i = 0; i < 4; i++) {
+        var ranIndex = Math.round(Math.random() * (cards.length - 1));
+        newDeck.push(cards[ranIndex]);
+        cards.splice(ranIndex, 1);
+    }
+    console.log(newDeck);
+    cards = newDeck;
 }
 
 function createBoard() {
-	shuffle();
-	for (var i = 0; i < cards.length; i++) {
-		var cardElement = document.createElement("img");
-		cardElement.setAttribute("src", "images/back.png");
-		cardElement.setAttribute("data-id", i);
-		cardElement.addEventListener("click", flipCard);
-		document.getElementById("game-board").appendChild(cardElement);
-	}
+    shuffle();
+    for (var i = 0; i < cards.length; i++) {
+        var cardElement = document.createElement("img");
+        cardElement.setAttribute("src", "images/back.png");
+        cardElement.setAttribute("data-id", i);
+        cardElement.addEventListener("click", flipCard);
+        document.getElementById("game-board").appendChild(cardElement);
+    }
 }
 
 function resetBoard() {
@@ -90,4 +90,3 @@ function resetBoard() {
 }
 
 createBoard();
-
